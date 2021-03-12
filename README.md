@@ -64,7 +64,7 @@ The color values make green-ish
 
 ### File Input and Output
 
-3/10/21: There have been no file input or outputs as of this date.
+3/12/21: After everything is finished, the program will ask if you want to save the values of Red, Blue and Green to a file. Answering yes will implement the values into it, saying no will show that the file is empty.
 
 ### Arrays/Vectors
 

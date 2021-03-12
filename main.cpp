@@ -1,5 +1,6 @@
 //Author: Tobias Huybers
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 int main() {
@@ -7,6 +8,10 @@ int main() {
 int cred = 0;
 int cgreen = 0;
 int cblue = 0;
+fstream reader;
+char letter;
+char letter2;
+string line = "";
 
 cout << "Please enter the values of Red, Green , and Blue" << endl;
 
@@ -133,5 +138,50 @@ else if (cgr > 0 && cgr <= 50 && cgreen < cblue){
     cout << endl;
     cout << "The color values make blue-ish" << endl;
 }
+
+//Ask if it wants to be saved to a file
+
+cout << endl;
+cout << "Do you want to save to a File 'RGBvalues.md'? (Y or N)" << endl;
+cin >> letter;
+
+reader.open("RGBvalues.txt");
+
+while (letter != 'N' || letter != 'n'){
+  if (letter == 'Y' || letter == 'y'){
+
+    reader << "R: " << cred << "\n";
+    reader << "G: " << cgreen << "\n";
+    reader << "B: " << cblue << "\n";
+
+    cout << endl;
+    cout << "File Saved" << endl;
+    cout << endl;
+
+    reader.close();
+    break;
+  }
+  else if (letter == 'N' || letter == 'n') {
+    reader.close();
+    break;
+  } else {
+    cout << "ERROR: Please input Y or N" << endl;
+    cin >> letter;
+  }
+}
+
+cout << "File 'RGBvalues.txt' says:" << endl;
+reader.open("RGBvalues.txt", ios::in);
+if (reader.is_open() ){
+  while (!reader.eof()){
+  getline(reader,line);
+  cout << line << endl;
+  }
+reader.close();
+}
+else {
+  cout << "Could not open " << "RGBvalues.txt" << endl;
+}
+
   return 0;
 }
