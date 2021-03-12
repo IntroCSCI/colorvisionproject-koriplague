@@ -1,0 +1,41 @@
+//If they make Red
+if (cgreen == cblue && cgreen < cred){
+    cout << endl;
+    cout << "The color values make red" << endl;
+}
+else if (cgb > 0 && cgb <= 50 && cgreen < cred){
+    cout << endl;
+    cout << "The color values make red-ish" << endl;
+}
+else if (cbg > 0 && cbg <= 50 && cblue < cred){
+    cout << endl;
+    cout << "The color values make red-ish" << endl;
+}
+
+//If they make Green
+if (cred == cblue && cred < cgreen){
+    cout << endl;
+    cout << "The color values make green" << endl;
+}
+else if (crb > 0 && crb <= 50 && cred < cgreen){
+    cout << endl;
+    cout << "The color values make green-ish" << endl;
+}
+else if (cbr > 0 && cbr <= 50 && cblue < cgreen){
+    cout << endl;
+    cout << "The color values make green-ish" << endl;
+}
+
+//If they make Blue
+if (cred == cgreen && cred < cblue){
+    cout << endl;
+    cout << "The color values make blue" << endl;
+}
+else if (crg > 0 && crg <= 50 && cred < cblue){
+    cout << endl;
+    cout << "The color values make blue-ish" << endl;
+}
+else if (cgr > 0 && cgr <= 50 && cgreen < cblue){
+    cout << endl;
+    cout << "The color values make blue-ish" << endl;
+}
