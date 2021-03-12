@@ -29,6 +29,7 @@ g++ --std=c++11 *.cpp -o cvp
 Here is an example of the program running:
 
 ```
+ g++ -std=c++11 *.cpp -o cvp; ./cvp
 Please enter the values of Red, Green , and Blue
 
 Enter value for red (0-255): 55
@@ -42,6 +43,17 @@ Green: 255
 Blue: 100
 
 The color values make green-ish
+
+Do you want to save to a File 'RGBvalues.md'? (Y or N)
+y
+
+File Saved
+
+File 'RGBvalues.txt' says:
+R: 55
+G: 255
+B: 100
+
 ```
 
 ## C++ Guide
