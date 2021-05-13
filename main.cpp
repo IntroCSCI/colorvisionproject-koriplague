@@ -3,6 +3,7 @@
 #include <fstream>
 #include <vector>
 #include <cstdlib>
+#include "RGBvalues.h"
 using namespace std;
 
 //Prototypes
@@ -22,6 +23,8 @@ vector <int> list;
 vector <int> redlist;
 vector <int> greenlist;
 vector <int> bluelist;
+
+RGBvalues colors;
 
 cout << "Please enter the values of Red, Green , and Blue" << endl;
 
@@ -120,24 +123,74 @@ else if (cgr > 0 && cgr <= 50 && cgreen < cblue){
     cout << "The values you chose make blue-ish" << endl;
 }
 
-//Vector Storage of 50 random values between 0 and 255
+//Vector Storage of 100 random values between 0 and 255
 do {
   list.push_back(rand() % 256);
-} while (list.size() != 50);
+} while (list.size() != 80);
 
 //Vector Storage for 5 red values
 do {
+  int r = 0;
+
   redlist.push_back(randomColor(list));
+
+  if (redlist[r] == cred && r == 0){
+
+    do{
+      redlist.pop_back();
+      redlist.push_back(randomColor(list));
+    }while (redlist[r] <= cred + 30 && redlist[r] >= cred - 30);
+
+  } else if (redlist[r] == redlist[r-1] && r > 0){
+    do{
+      redlist.pop_back();
+      redlist.push_back(randomColor(list));
+    }while (redlist[r] <= redlist[r-1] + 30 && redlist[r] >= redlist[r-1] - 30);
+  }else{
+    r++;
+  }
 } while (redlist.size() != 5);
 
 //Vector Storage for 5 green values
 do {
+  int g = 0;
+
   greenlist.push_back(randomColor(list));
+
+  if (greenlist[g] == cgreen && g == 0){
+    do{
+      greenlist.pop_back();
+      greenlist.push_back(randomColor(list));
+    }while (greenlist[g] <= cgreen + 30 && greenlist[g] >= cgreen - 30);
+  } else if (greenlist[g] == greenlist[g-1] && g >= 0){
+    do{
+      greenlist.pop_back();
+      greenlist.push_back(randomColor(list));
+    }while (greenlist[g] <= greenlist[g-1] + 30 && greenlist[g] >= greenlist[g-1] - 30);
+  }else{
+    g++;
+  }
 } while (greenlist.size() != 5);
 
 //Vector Storage for 5 blue values
 do {
+  int b = 0;
+
   bluelist.push_back(randomColor(list));
+
+  if (bluelist[b] == cblue && b == 0){
+    do{
+      bluelist.pop_back();
+      bluelist.push_back(randomColor(list));
+    }while (bluelist[b] <= cblue + 30 && bluelist[b] >= cblue - 30);
+  } else if (bluelist[b] == redlist[b-1] && b >= 0){
+    do{
+      bluelist.pop_back();
+      bluelist.push_back(randomColor(list));
+    }while (bluelist[b] <= bluelist[b-1] + 30 && bluelist[b] >= bluelist[b-1] - 30);
+  }else{
+    b++;
+  }
 } while (bluelist.size() != 5);
 
 cout << "\n" <<"Here are 5 other colors:" <<endl;
@@ -148,26 +201,29 @@ for (int i = 0; i < bluelist.size(); i++){
 //Ask if it wants to be saved to a file
 
 cout << endl;
-cout << "Do you want to save the values and 5 other colors to 'RGBvalues.txt'? (Y or N)" << endl;
+cout << "Do you want to save the values and 5 other colors as an image to 'Colors.svg'? (Y or N)" << endl;
 cin >> letter;
 
-reader.open("RGBvalues.txt");
+//Colors.svg file
 
+reader.open("Colors.svg");
 while (letter != 'N' || letter != 'n'){
   if (letter == 'Y' || letter == 'y'){
-    reader << "The Values You Picked" << "\n";
-    reader << "R: " << cred << "\n";
-    reader << "G: " << cgreen << "\n";
-    reader << "B: " << cblue << "\n";
-    reader << "\n" << "The 5 other Colors:" << "\n";
-    reader << redlist[0] << ", " << greenlist[0] << ", " << bluelist[0] << "\n";
-    reader << redlist[1] << ", " << greenlist[1] << ", " << bluelist[1] << "\n";
-    reader << redlist[2] << ", " << greenlist[2] << ", " << bluelist[2] << "\n";
-    reader << redlist[3] << ", " << greenlist[3] << ", " << bluelist[3] << "\n";
-    reader << redlist[4] << ", " << greenlist[4] << ", " << bluelist[4];
+    reader << "<?xml version='1.0' standalone='no'?>" << "\n";
+    reader << "<svg width='600' height='300' xmlns='http://www.w3.org/2000/svg' version='1.1'>" << "\n";
+    //Neutral grey background
+    reader << colors.svgBackground() << "\n";
+    //Colored Rectangles
+    reader << colors.svgRGB0(cred, cgreen, cblue) << "\n";
+    reader << colors.svgRGB1(redlist[0],greenlist[0],bluelist[0]) << "\n";
+    reader << colors.svgRGB2(redlist[1],greenlist[1],bluelist[1]) << "\n";
+    reader << colors.svgRGB3(redlist[2],greenlist[2],bluelist[2]) << "\n";
+    reader << colors.svgRGB4(redlist[3],greenlist[3],bluelist[3]) << "\n";
+    reader << colors.svgRGB5(redlist[4],greenlist[4],bluelist[4]) << "\n";
+    reader << "</svg>";
 
     cout << endl;
-    cout << "!File Saved!" << endl;
+    cout << "!Image Saved!" << endl;
     cout << endl;
 
     reader.close();
@@ -182,8 +238,9 @@ while (letter != 'N' || letter != 'n'){
   }
 }
 
-cout << "File 'RGBvalues.txt' says:" << "\n" << endl;
-reader.open("RGBvalues.txt", ios::in);
+
+cout << "File 'Colors.svg' says:" << "\n" << endl;
+reader.open("Colors.svg", ios::in);
 if (reader.is_open() ){
   while (!reader.eof()){
   getline(reader,line);
@@ -192,7 +249,7 @@ if (reader.is_open() ){
 reader.close();
 }
 else {
-  cout << "Could not open 'RGBvalues.txt' " << endl;
+  cout << "Could not open 'Colors.svg' " << endl;
 }
 
   return 0;

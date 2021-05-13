@@ -2,7 +2,7 @@
 
 ## Description
 
-04/21/21: The program asks what values of RGB and if the values are in a specific bound the program will state what kind of color it is, afterwards the code will state 5 more different RGB color values and save both the 5 new and inputed values into 'RGBvalues.txt'.
+05/12/21: The program asks what values of RGB and if the values are in a specific bound the program will state what kind of color it is, afterwards the code will state 5 more different RGB color values and save both the 5 new and inputed values into 'Colors.svg' where an image of the 6 colors will be displayed.
 
 ### v0.2 Updates
 
@@ -10,7 +10,7 @@ The program has slimmed the main code, while also adding the ability for the cod
 
 ### v1.0 Updates
 
-*Coming soon*
+The program has a more slimmed main.cpp, while getting rid of the 'RGBvalues.txt' file to save the colors to, it now saves the 5 colors and the one the user made to 'Colors.svg' as an image.
 
 
 ## Developer
@@ -42,33 +42,32 @@ Red: 55
 Green: 255
 Blue: 100
 
-The color values make green-ish
+The values you chose make green-ish
 
 Here are 5 other colors:
-251, 141, 255
-46, 242, 90
-93, 27, 13
-201, 94, 99
-74, 154, 49
+88, 13, 102
+41, 115, 186
+46, 198, 46
+51, 81, 84
+163, 178, 90
 
-Do you want to save to a File 'RGBvalues.md'? (Y or N)
+Do you want to save the values and 5 other colors as an image to 'Colors.svg'? (Y or N)
 Y
 
-!File Saved!
+!Image Saved!
 
-File 'RGBvalues.txt' says:
+File 'Colors.svg' says:
 
-The Values You Picked:
-R: 55
-G: 255
-B: 100
-
-The 5 other Colors:
-251, 141, 255
-46, 242, 90
-93, 27, 13
-201, 94, 99
-74, 154, 49
+<?xml version='1.0' standalone='no'?>
+<svg width='600' height='300' xmlns='http://www.w3.org/2000/svg' version='1.1'>
+<line x1='0' x2='600' y1='150' y2='150' stroke='rgb(128,128,128)' stroke-width='300' stroke-linecap='butt'/>
+<line x1='50' x2='50' y1='100' y2='200' stroke='rgb(55, 255, 100)' stroke-width='50' stroke-linecap='butt'/>
+<line x1='150' x2='150' y1='100' y2='200' stroke='rgb(88, 13, 102)' stroke-width='50' stroke-linecap='butt'/>
+<line x1='250' x2='250' y1='100' y2='200' stroke='rgb(41, 115, 186)' stroke-width='50' stroke-linecap='butt'/>
+<line x1='350' x2='350' y1='100' y2='200' stroke='rgb(46, 198, 46)' stroke-width='50' stroke-linecap='butt'/>
+<line x1='450' x2='450' y1='100' y2='200' stroke='rgb(51, 81, 84)' stroke-width='50' stroke-linecap='butt'/>
+<line x1='550' x2='550' y1='100' y2='200' stroke='rgb(163, 178, 90)' stroke-width='50' stroke-linecap='butt'/>
+</svg>
 
 ```
 
@@ -94,6 +93,8 @@ The 5 other Colors:
 
 03/12/21: After everything is finished, the program will ask if you want to save the values of Red, Blue and Green to a file. Answering yes will implement the values into it, saying no will show that the file is empty.
 
+05/12/21: It's basically the same as when the File was a '.txt', but now the reader when you answer yes will impliment the values of all 6 colors and put them as seperate rectangles with their respective color with a neutral grey background.
+
 ### Arrays/Vectors
 
 04/21/21: There are a couple instances where I used Vectors in the code. I mostly used them to help store the values of the 5 other colors. So the code generates 50 different values between 0 and 255 and it stores the numbers into a Vector. Then I have the code pick 5 different values from the 50 and store it into 1 of 3 Vectors for Red, Green, and Blue.
@@ -104,4 +105,4 @@ The 5 other Colors:
 
 ### Classes
 
-*Coming in version 1.0*
+05/12/21: There is 1 class, this class has a total of 7 different members in public and 3 in private, but there are really only 2 different members in public. 6 of the 7 public members display out a string that can only used by 'Colors.svg' that makes the different rectangles based on the 3 values put in, the reason why there are 6 is that each rectangle is in a different cordinate and also to make 'main.cpp' look cleaner. The other member in public is also a string, but it takes no other parameters, because it only makes the background of 'Colors.svg'
