@@ -20,6 +20,7 @@ fstream reader;
 char letter;
 string line;
 vector <int> list;
+vector <int> list2;
 vector <int> redlist;
 vector <int> greenlist;
 vector <int> bluelist;
@@ -123,9 +124,10 @@ else if (cgr > 0 && cgr <= 50 && cgreen < cblue){
     cout << "The values you chose make blue-ish" << endl;
 }
 
-//Vector Storage of 100 random values between 0 and 255
+//Vector Storage of 80 random values between 0 and 255
 do {
   list.push_back(rand() % 256);
+  list2.push_back(rand() % 256);
 } while (list.size() != 80);
 
 //Vector Storage for 5 red values
@@ -138,13 +140,12 @@ do {
 
     do{
       redlist.pop_back();
-      redlist.push_back(randomColor(list));
+      redlist.push_back(randomColor(list2));
     }while (redlist[r] <= cred + 30 && redlist[r] >= cred - 30);
-
   } else if (redlist[r] == redlist[r-1] && r > 0){
     do{
       redlist.pop_back();
-      redlist.push_back(randomColor(list));
+      redlist.push_back(randomColor(list2));
     }while (redlist[r] <= redlist[r-1] + 30 && redlist[r] >= redlist[r-1] - 30);
   }else{
     r++;
@@ -160,12 +161,12 @@ do {
   if (greenlist[g] == cgreen && g == 0){
     do{
       greenlist.pop_back();
-      greenlist.push_back(randomColor(list));
+      greenlist.push_back(randomColor(list2));
     }while (greenlist[g] <= cgreen + 30 && greenlist[g] >= cgreen - 30);
   } else if (greenlist[g] == greenlist[g-1] && g >= 0){
     do{
       greenlist.pop_back();
-      greenlist.push_back(randomColor(list));
+      greenlist.push_back(randomColor(list2));
     }while (greenlist[g] <= greenlist[g-1] + 30 && greenlist[g] >= greenlist[g-1] - 30);
   }else{
     g++;
@@ -181,12 +182,12 @@ do {
   if (bluelist[b] == cblue && b == 0){
     do{
       bluelist.pop_back();
-      bluelist.push_back(randomColor(list));
+      bluelist.push_back(randomColor(list2));
     }while (bluelist[b] <= cblue + 30 && bluelist[b] >= cblue - 30);
   } else if (bluelist[b] == redlist[b-1] && b >= 0){
     do{
       bluelist.pop_back();
-      bluelist.push_back(randomColor(list));
+      bluelist.push_back(randomColor(list2));
     }while (bluelist[b] <= bluelist[b-1] + 30 && bluelist[b] >= bluelist[b-1] - 30);
   }else{
     b++;

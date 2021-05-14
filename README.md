@@ -99,10 +99,12 @@ File 'Colors.svg' says:
 
 04/21/21: There are a couple instances where I used Vectors in the code. I mostly used them to help store the values of the 5 other colors. So the code generates 50 different values between 0 and 255 and it stores the numbers into a Vector. Then I have the code pick 5 different values from the 50 and store it into 1 of 3 Vectors for Red, Green, and Blue.
 
+05/13/21: There is now 2 vectors that have code that generate 80 different values between 0 and 255. I did this to make sure the values would have a less likely chance of being the same.
+
 ### Functions
 
 04/21/21: There are 2 functions that I have created for this code, one was to slim down the main code. It's a void return type function that check if the user put in a value between 0 and 255. The other is a integer return type function that picks one number form a list of 50 values and convert it from a vector value to a plain integer.
 
 ### Classes
 
-05/12/21: There is 1 class, this class has a total of 7 different members in public and 3 in private, but there are really only 2 different members in public. 6 of the 7 public members display out a string that can only used by 'Colors.svg' that makes the different rectangles based on the 3 values put in, the reason why there are 6 is that each rectangle is in a different cordinate and also to make 'main.cpp' look cleaner. The other member in public is also a string, but it takes no other parameters, because it only makes the background of 'Colors.svg'
+05/12/21: There is 1 class, this class has a total of 7 different members in public and 3 in private, but there are really only 2 different members in public. 6 of the 7 public members display out a string that can only used by 'Colors.svg' that makes the different rectangles based on the 3 values put in, the reason why there are 6 is that each rectangle is in a different cordinate and also to make 'main.cpp' look cleaner. The other member in public is also a string, but it takes no other parameters, because it only makes the background of 'Colors.svg'.
