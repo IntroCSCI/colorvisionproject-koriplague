@@ -77,6 +77,22 @@ File 'Colors.svg' says:
 
 3/10/21: The only variables as of right now are only integer variables to hold the number value of what the user plugged in, however it also has integer values of the red, green, and blue values subtracted by each other to make upper and lower bounds for deciding what color the input is.
 
+```
+//Variables
+int cred = 0;
+int cgreen = 0;
+int cblue = 0;
+fstream reader;
+char letter;
+string line;
+vector <int> list;
+vector <int> list2;
+vector <int> redlist;
+vector <int> greenlist;
+vector <int> bluelist;
+
+RGBvalues colors;
+```
 ### Console Input and Output
 
 03/10/21: The only console input the user plugs in is the values for either red, green, or blue. However the console outputs the promt for these values, the values you put in, and if the user's values are in the upper and lower bounds a special message that states about what the color is.
@@ -95,6 +111,59 @@ File 'Colors.svg' says:
 
 05/12/21: It's basically the same as when the File was a '.txt', but now the reader when you answer yes will impliment the values of all 6 colors and put them as seperate rectangles with their respective color with a neutral grey background.
 
+```
+//Colors.svg file
+
+reader.open("Colors.svg");
+while (letter != 'N' || letter != 'n'){
+  if (letter == 'Y' || letter == 'y'){
+    reader << "<?xml version='1.0' standalone='no'?>" << "\n";
+    reader << "<svg width='600' height='300' xmlns='http://www.w3.org/2000/svg' version='1.1'>" << "\n";
+    //Neutral grey background
+    reader << colors.svgBackground() << "\n";
+    //Colored Rectangles
+    reader << colors.svgRGB0(cred, cgreen, cblue) << "\n";
+    reader << colors.svgRGB1(redlist[0],greenlist[0],bluelist[0]) << "\n";
+    reader << colors.svgRGB2(redlist[1],greenlist[1],bluelist[1]) << "\n";
+    reader << colors.svgRGB3(redlist[2],greenlist[2],bluelist[2]) << "\n";
+    reader << colors.svgRGB4(redlist[3],greenlist[3],bluelist[3]) << "\n";
+    reader << colors.svgRGB5(redlist[4],greenlist[4],bluelist[4]) << "\n";
+    reader << "</svg>";
+
+    cout << endl;
+    cout << "!Image Saved!" << endl;
+    cout << endl;
+
+    reader.close();
+    break;
+  }
+  else if (letter == 'N' || letter == 'n') {
+    reader.close();
+    break;
+  } else {
+    cout << "ERROR: Please input Y or N" << endl;
+    cin >> letter;
+  }
+}
+
+
+cout << "File 'Colors.svg' says:" << "\n" << endl;
+reader.open("Colors.svg", ios::in);
+if (reader.is_open() ){
+  while (!reader.eof()){
+  getline(reader,line);
+  cout << line << endl;
+  }
+reader.close();
+}
+else {
+  cout << "Could not open 'Colors.svg' " << endl;
+}
+
+  return 0;
+}
+
+```
 ### Arrays/Vectors
 
 04/21/21: There are a couple instances where I used Vectors in the code. I mostly used them to help store the values of the 5 other colors. So the code generates 50 different values between 0 and 255 and it stores the numbers into a Vector. Then I have the code pick 5 different values from the 50 and store it into 1 of 3 Vectors for Red, Green, and Blue.
@@ -105,6 +174,29 @@ File 'Colors.svg' says:
 
 04/21/21: There are 2 functions that I have created for this code, one was to slim down the main code. It's a void return type function that check if the user put in a value between 0 and 255. The other is a integer return type function that picks one number form a list of 50 values and convert it from a vector value to a plain integer.
 
+```
+//Function that checks if Red, Green, or Blue is between 0 and 255
+void checkValues(int & number) {
+  while (number <= 0 || number >= 0){
+  if (number < 0 || number > 255){
+    cout << endl;
+    cout << "ERROR: value not between 0-255" << endl;
+    cout << endl;
+    cout << "Enter a value between (0-255): ";
+    cin >> number;
+  } else {
+    break;
+  }
+  }
+}
+
+//Function that picks a random integer from a vector <int> storage
+int randomColor(vector <int> file){
+  int number = file[rand() % 50];
+
+  return number;
+}
+```
 ### Classes
 
 05/12/21: There is 1 class, this class has a total of 7 different members in public and 3 in private, but there are really only 2 different members in public. 6 of the 7 public members display out a string that can only used by 'Colors.svg' that makes the different rectangles based on the 3 values put in, the reason why there are 6 is that each rectangle is in a different cordinate and also to make 'main.cpp' look cleaner. The other member in public is also a string, but it takes no other parameters, because it only makes the background of 'Colors.svg'.
